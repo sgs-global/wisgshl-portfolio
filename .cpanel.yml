@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/$USER/public_html/sgsitc.com
+    - export DEPLOYPATH=/home/alltradebd/sgsitc.com/
     - /bin/mkdir -p $DEPLOYPATH
     - /usr/bin/env npm ci
     - /usr/bin/env npm run build

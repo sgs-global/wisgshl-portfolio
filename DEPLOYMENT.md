@@ -1,15 +1,15 @@
 # GitHub and cPanel deployment
 
-This project is configured as a static Next.js export. `npm run build` creates the production website in `out/`, and cPanel deploys that folder to `public_html`.
+This project is configured as a static Next.js export. `npm run build` creates the production website in `out/`, and cPanel deploys that folder to the `sgsitc.com` document root.
 
 ## Requirements
 
 - Node.js 20.9 or newer on the local computer and cPanel account.
 - A GitHub repository.
 - cPanel access with **Git Version Control** and Terminal/SSH enabled.
-- The domain document root set to `/home/CPANEL_USERNAME/public_html`.
+- The `sgsitc.com` document root set to `/home/alltradebd/sgsitc.com`.
 
-If this domain uses an addon-domain folder rather than the account's main `public_html`, update `DEPLOYPATH` in `.cpanel.yml` before deploying.
+The production destination is already configured as `/home/alltradebd/sgsitc.com/` in `.cpanel.yml`.
 
 ## 1. Publish the local repository to GitHub
 
@@ -27,11 +27,11 @@ For a private repository, configure an SSH deploy key in cPanel or use the priva
 1. Open **cPanel → Files → Git Version Control**.
 2. Choose **Create** and enable **Clone a Repository**.
 3. Enter the GitHub clone URL.
-4. Use a repository path outside `public_html`, for example `/home/CPANEL_USERNAME/repositories/wisgshl`.
+4. Use a repository path outside the website folder, for example `/home/alltradebd/repositories/wisgshl`.
 5. Open **Manage → Pull or Deploy**.
 6. Select **Update from Remote**, then **Deploy HEAD Commit**.
 
-cPanel reads `.cpanel.yml`, installs the locked dependencies, creates the static `out/` export, and copies it to `public_html`.
+cPanel reads `.cpanel.yml`, installs the locked dependencies, creates the static `out/` export, and copies it to `/home/alltradebd/sgsitc.com/`.
 
 ## 3. Publish later updates
 
