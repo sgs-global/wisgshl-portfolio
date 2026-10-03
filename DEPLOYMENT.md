@@ -1,10 +1,10 @@
 # GitHub and cPanel deployment
 
-This project is configured as a static Next.js export. `npm run build` creates the production website in `out/`, and cPanel deploys that folder to the `sgsitc.com` document root.
+This project is configured as a static Next.js export. `npm run deploy:prepare` builds the website locally and creates the checked-in `cpanel-dist/` package. cPanel copies that package to the `sgsitc.com` document root without requiring Node.js on the hosting server.
 
 ## Requirements
 
-- Node.js 20.9 or newer on the local computer and cPanel account.
+- Node.js 20.9 or newer on the local computer. The cPanel server does not need Node.js.
 - A GitHub repository.
 - cPanel access with **Git Version Control** and Terminal/SSH enabled.
 - The `sgsitc.com` document root set to `/home/alltradebd/sgsitc.com`.
@@ -31,14 +31,14 @@ For a private repository, configure an SSH deploy key in cPanel or use the priva
 5. Open **Manage → Pull or Deploy**.
 6. Select **Update from Remote**, then **Deploy HEAD Commit**.
 
-cPanel reads `.cpanel.yml`, installs the locked dependencies, creates the static `out/` export, and copies it to `/home/alltradebd/sgsitc.com/`.
+cPanel reads `.cpanel.yml` and copies the already-built `cpanel-dist/` package to `/home/alltradebd/sgsitc.com/`.
 
 ## 3. Publish later updates
 
 On the local computer:
 
 ```bash
-npm run production:check
+npm run deploy:prepare
 git add .
 git commit -m "Describe the website update"
 git push origin main
@@ -50,7 +50,6 @@ For automatic push deployment, add the cPanel-managed repository as a second Git
 
 ## Important checks before launch
 
-- Confirm the Node.js version in cPanel is at least 20.9.
 - Confirm `DEPLOYPATH` matches the domain's real document root.
 - Enable the domain's SSL certificate and force HTTPS in cPanel.
 - Upload `public/videos/company-introduction.mp4` before publishing the company video.

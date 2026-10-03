@@ -3,7 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/alltradebd/sgsitc.com/
     - /bin/mkdir -p $DEPLOYPATH
-    - /usr/bin/env npm ci
-    - /usr/bin/env npm run build
-    - /bin/cp -R out/. $DEPLOYPATH
-    - /bin/cp .htaccess $DEPLOYPATH
+    - /bin/cp -R cpanel-dist/. $DEPLOYPATH
