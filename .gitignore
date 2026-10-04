@@ -18,7 +18,9 @@ qa-*.png
 
 # Large videos are uploaded directly to cPanel or hosted on YouTube
 public/videos/*.mp4
+!public/videos/company-introduction.mp4
 cpanel-dist/videos/*.mp4
+!cpanel-dist/videos/company-introduction.mp4
 
 # Editors and operating systems
 .vscode/

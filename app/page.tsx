@@ -3,15 +3,11 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Cpu,
   Factory,
-  Globe2,
   HousePlug,
   InspectionPanel,
   Lightbulb,
-  Palette,
   Ship,
-  ShoppingBag,
   SunMedium,
   UserRound,
   Watch,
@@ -43,10 +39,10 @@ const divisions = [
   { title: "LED Lighting", text: "Practical indoor, outdoor and project lighting solutions for diverse market requirements.", image: images.lighting, icon: Lightbulb },
   { title: "Watches & Smart Watches", text: "Classic timepieces and connected wearable products across a range of styles.", image: images.watch, icon: Watch },
   { title: "Small Home Appliances", text: "Everyday appliances selected for contemporary homes and international distribution.", image: images.appliance, icon: HousePlug },
-  { title: "Consumer Electronics", text: "Accessible electronics and connected devices aligned with changing consumer needs.", image: images.electronics, icon: Cpu },
-  { title: "Consumer Goods", text: "A flexible portfolio of useful products sourced for wholesale and retail channels.", image: images.goods, icon: ShoppingBag },
-  { title: "OEM & ODM Customization", text: "Product, packaging and identity customization developed around customer requirements.", image: images.manufacturing, icon: Palette },
-  { title: "International Trading", text: "Sourcing and supply coordination that helps products move between global markets.", image: images.logistics, icon: Ship },
+  // { title: "Consumer Electronics", text: "Accessible electronics and connected devices aligned with changing consumer needs.", image: images.electronics, icon: Cpu },
+  // { title: "Consumer Goods", text: "A flexible portfolio of useful products sourced for wholesale and retail channels.", image: images.goods, icon: ShoppingBag },
+  // { title: "OEM & ODM Customization", text: "Product, packaging and identity customization developed around customer requirements.", image: images.manufacturing, icon: Palette },
+  // { title: "International Trading", text: "Sourcing and supply coordination that helps products move between global markets.", image: images.logistics, icon: Ship },
 ];
 
 const supplySteps = [
@@ -155,10 +151,10 @@ export default function Home() {
               <p className="large-copy">Worldwide Industrial SGS Holdings Limited is an international manufacturer and supplier focused on dependable products, OEM/ODM customization, and wholesale business.</p>
               <p>Our business spans multiple product categories, including solar energy products, LED lighting, watches, small home appliances, and consumer goods.</p>
               <div className="mini-features">
-                <div><Globe2 /><span><strong>International outlook</strong>Connecting opportunity across markets</span></div>
+                {/* <div><Globe2 /><span><strong>International outlook</strong>Connecting opportunity across markets</span></div> */}
                 <div><Factory /><span><strong>Manufacturing focused</strong>Products developed for business requirements</span></div>
               </div>
-              <a className="text-link" href="#divisions">Discover Our Company <ArrowRight size={17} /></a>
+              {/* <a className="text-link" href="#divisions">Discover Our Company <ArrowRight size={17} /></a> */}
             </div>
           </div>
         </section>
