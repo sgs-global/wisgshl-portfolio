@@ -16,6 +16,10 @@ npm-debug.log*
 qa-*.png
 .edge-qa-*/
 
+# Large videos are uploaded directly to cPanel or hosted on YouTube
+public/videos/*.mp4
+cpanel-dist/videos/*.mp4
+
 # Editors and operating systems
 .vscode/
 .idea/

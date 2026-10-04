@@ -125,15 +125,15 @@ export default function Home() {
                   <span><Ship size={17} /> Global supply</span>
                 </div>
                 <p className="hero-lead">SGS is a global manufacturer and supplier of solar energy products, LED lighting, lithium battery solutions, smart electronics, and consumer gadgets. Through advanced manufacturing, OEM/ODM customization, and international distribution, we deliver reliable and innovative products to customers worldwide.</p>
-                <div className="button-row">
+                {/* <div className="button-row">
                   <a className="button button-primary button-large" href="/business-inquiry">Explore Our Businesses <ArrowRight size={18} /></a>
                   <a className="button button-quiet button-large" href="/contact">Contact Our Team <ArrowUpRight size={18} /></a>
-                </div>
-                <div className="trust-line"><span className="trust-avatars"><i>SG</i><i>25+</i><i>∞</i></span><p><strong>Since 1998</strong><br />Building business relationships</p></div>
+                </div> */}
+                {/* <div className="trust-line"><span className="trust-avatars"><i>SG</i><i>25+</i><i>∞</i></span><p><strong>Since 1998</strong><br />Building business relationships</p></div> */}
               </div>
             </div>
             <div className="stats-grid hero-metrics" aria-label="Company statistics">
-              {[["1998", "Since", "Business experience"], ["800+", "Trusted by", "Clients"], ["500+", "Delivered", "Services / orders"], ["500+", "Welcomed", "Company visitors"]].map(([number, kicker, label]) => (
+              {[["1999", "Since", "Business experience"], ["800+", "Trusted by", "Clients"], ["500+", "Delivered", "Services / orders"], ["500+", "Welcomed", "Company visitors"]].map(([number, kicker, label]) => (
                 <div className="stat-card" key={label}><span>{kicker}</span><strong>{number}</strong><p>{label}</p></div>
               ))}
             </div>
