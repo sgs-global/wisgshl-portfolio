@@ -4,21 +4,22 @@ import {
   ArrowUpRight,
   Check,
   Factory,
-  HousePlug,
   InspectionPanel,
   Lightbulb,
   Ship,
   SunMedium,
   UserRound,
-  Watch,
   Youtube,
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HomeMotion } from "@/components/HomeMotion";
+import { ProductCategories } from "@/components/ProductCategories";
+import { InsideSgs } from "@/components/InsideSgs";
+import { discoverInsideSgsImages } from "@/components/insideSgsImages.server";
 
 const images = {
-  office: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+  office: "/images/LED_cover.png",
   solar: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=85",
   lighting: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=1200&q=85",
   watch: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=85",
@@ -33,17 +34,6 @@ const images = {
   exhibition: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=85",
   development: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=85",
 };
-
-const divisions = [
-  { title: "Solar Energy", text: "Solar panels and supporting energy products for residential, commercial and industrial applications.", image: images.solar, icon: SunMedium },
-  { title: "LED Lighting", text: "Practical indoor, outdoor and project lighting solutions for diverse market requirements.", image: images.lighting, icon: Lightbulb },
-  { title: "Watches & Smart Watches", text: "Classic timepieces and connected wearable products across a range of styles.", image: images.watch, icon: Watch },
-  { title: "Small Home Appliances", text: "Everyday appliances selected for contemporary homes and international distribution.", image: images.appliance, icon: HousePlug },
-  // { title: "Consumer Electronics", text: "Accessible electronics and connected devices aligned with changing consumer needs.", image: images.electronics, icon: Cpu },
-  // { title: "Consumer Goods", text: "A flexible portfolio of useful products sourced for wholesale and retail channels.", image: images.goods, icon: ShoppingBag },
-  // { title: "OEM & ODM Customization", text: "Product, packaging and identity customization developed around customer requirements.", image: images.manufacturing, icon: Palette },
-  // { title: "International Trading", text: "Sourcing and supply coordination that helps products move between global markets.", image: images.logistics, icon: Ship },
-];
 
 const supplySteps = [
   {
@@ -91,11 +81,8 @@ function SectionHeading({ eyebrow, title, text, center = false }: { eyebrow: str
   );
 }
 
-function ImageNote() {
-  return <span className="image-note">Representative image</span>;
-}
-
-export default function Home() {
+export default async function Home() {
+  const insideSgsImages = await discoverInsideSgsImages();
   return (
     <>
       <Header />
@@ -120,7 +107,9 @@ export default function Home() {
                   <span><InspectionPanel size={17} /> Quality focus</span>
                   <span><Ship size={17} /> Global supply</span>
                 </div>
-                <p className="hero-lead">SGS is a global manufacturer and supplier of solar energy products, LED lighting, lithium battery solutions, smart electronics, and consumer gadgets. Through advanced manufacturing, OEM/ODM customization, and international distribution, we deliver reliable and innovative products to customers worldwide.</p>
+                <p className="hero-lead">Worldwide Industrial SGS Holdings Limited is an international manufacturing and supply company specializing in solar energy products, advanced LED lighting, lithium battery solutions, and customized OEM/ODM manufacturing.
+
+We connect product innovation, manufacturing expertise, and global business opportunities to deliver dependable solutions for customers and partners worldwide.</p>
                 {/* <div className="button-row">
                   <a className="button button-primary button-large" href="/business-inquiry">Explore Our Businesses <ArrowRight size={18} /></a>
                   <a className="button button-quiet button-large" href="/contact">Contact Our Team <ArrowUpRight size={18} /></a>
@@ -149,32 +138,17 @@ export default function Home() {
             <div className="about-copy">
               <SectionHeading eyebrow="About WISGSHL" title="Built on Experience. Focused on Manufacturing." />
               <p className="large-copy">Worldwide Industrial SGS Holdings Limited is an international manufacturer and supplier focused on dependable products, OEM/ODM customization, and wholesale business.</p>
-              <p>Our business spans multiple product categories, including solar energy products, LED lighting, watches, small home appliances, and consumer goods.</p>
+              <p>Discover Worldwide Industrial SGS Holdings Limited, an international manufacturer and supplier of solar energy products, LED lighting, lithium battery solutions manufacturing services.</p>
               <div className="mini-features">
                 {/* <div><Globe2 /><span><strong>International outlook</strong>Connecting opportunity across markets</span></div> */}
-                <div><Factory /><span><strong>Manufacturing focused</strong>Products developed for business requirements</span></div>
+                {/* <div><Factory /><span><strong>Manufacturing focused</strong>Products developed for business requirements</span></div> */}
               </div>
               {/* <a className="text-link" href="#divisions">Discover Our Company <ArrowRight size={17} /></a> */}
             </div>
           </div>
         </section>
 
-        <section className="section divisions" id="divisions">
-          <div className="container">
-            <div className="heading-row">
-              <SectionHeading eyebrow="What we manufacture" title="Our Product Categories" text="A diversified portfolio supported by production experience, product development and international wholesale supply." />
-              <a className="text-link desktop-link" href="/business-inquiry">Discuss your project <ArrowRight size={17} /></a>
-            </div>
-            <div className="division-grid">
-              {divisions.map(({ title, text, image, icon: Icon }, index) => (
-                <a className="division-card" href={title === "Solar Energy" ? "https://www.solarsgs.com" : "/contact"} target={title === "Solar Energy" ? "_blank" : undefined} rel="noreferrer" key={title}>
-                  <div className="division-image"><Image src={image} alt={`Representative ${title} image`} fill quality={95} sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 25vw" /><span className="card-number">0{index + 1}</span><ImageNote /></div>
-                  <div className="division-content"><Icon size={22} /><h3>{title}</h3><p>{text}</p><span className="card-arrow"><ArrowUpRight size={17} /></span></div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ProductCategories />
 
         <section className="section supply-journey" id="manufacturing">
           <div className="container">
@@ -215,18 +189,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section gallery-section" id="inside-sgs">
-          <div className="container">
-            <div className="heading-row"><SectionHeading eyebrow="A closer look" title="Inside SGS" text="A view into the activities that support collaboration, product development and international supply." /><span className="placeholder-key">All gallery images are representative</span></div>
-            <div className="gallery-grid">
-              {[
-                [images.meeting, "Team meetings", "Collaboration"], [images.manufacturing, "Manufacturing facilities", "Production"], [images.inspection, "Product inspection", "Quality process"], [images.packaging, "Packaging activities", "Supply"], [images.exhibition, "Company events", "Business"],
-              ].map(([src, title, label], i) => <div className={`gallery-item gallery-${i + 1}`} key={title}><Image src={src} alt={`Representative ${title}`} fill sizes="(max-width: 700px) 100vw, 50vw" /><div><span>{label}</span><h3>{title}</h3></div></div>)}
-            </div>
-          </div>
-        </section>
+        <InsideSgs images={insideSgsImages} />
 
-        <section className="section team" id="team">
+        {/* <section className="section team" id="team">
           <div className="container">
             <SectionHeading eyebrow="The people behind the work" title="Our Team" text="Eight profile spaces prepared for individual portraits, positions and professional information." center />
             <div className="team-card-grid">
@@ -243,9 +208,9 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section className="section youtube-section" id="videos">
+        {/* <section className="section youtube-section" id="videos">
           <div className="container">
             <div className="youtube-heading">
               <SectionHeading eyebrow="Stories in motion" title="Watch WISGSHL on YouTube" text="Company introductions, product demonstrations and manufacturing stories published through our official YouTube channel." />
@@ -260,22 +225,24 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section className="section brands" id="brands">
+        {/* <section className="section brands" id="brands">
           <div className="container">
             <SectionHeading eyebrow="Focused business identities" title="Our Brands & Business Websites" text="Verified specialist brands within the wider WISGSHL business portfolio." center />
             <div className="brand-cards">
+              <article><div className="sub-brand light-brand"><Lightbulb /><strong>Light<span>SGS</span></strong></div><p>LED lighting products for practical indoor, outdoor and project applications.</p><a className="button button-outline" href="https://www.lightsgs.com/" target="_blank" rel="noreferrer">Visit Website <ArrowUpRight size={16} /></a></article>
               <article><div className="sub-brand solar-brand"><SunMedium /><strong>Solar<span>SGS</span></strong></div><p>Solar energy products and supporting solutions for residential, commercial and industrial needs.</p><a className="button button-outline" href="https://www.solarsgs.com" target="_blank" rel="noreferrer">Visit Website <ArrowUpRight size={16} /></a></article>
-              <article><div className="sub-brand light-brand"><Lightbulb /><strong>Light<span>SGS</span></strong></div><p>LED lighting products for practical indoor, outdoor and project applications.</p><span className="pending-link">Official website link pending</span></article>
+              <article><div className="sub-brand global-brand"><Lightbulb /><strong>Global<span>SGS</span></strong></div><p>Global home appliance products</p><a className="button button-outline" href="https://globalsgs.com/" target="_blank" rel="noreferrer">Visit Website <ArrowUpRight size={16} /></a></article>
+
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="section contact-section" id="contact">
           <div className="container contact-grid">
             <div><SectionHeading eyebrow="Contact our team" title="Tell Us What You Need" text="Share your product, quantity, customization and delivery requirements with our manufacturing team." /><a className="button button-primary button-large" href="/contact">Open Contact Form <ArrowRight size={18} /></a></div>
-            <div className="contact-card"><span>Business contact</span><a href="mailto:manager@globalsgs.com">manager@globalsgs.com <ArrowUpRight size={16} /></a><a href="tel:+8615820404334">+86 158 2040 4334 <ArrowUpRight size={16} /></a><p>Use the contact page to provide complete product and company information.</p><div><Check size={15} /> Direct customer inquiries welcome</div></div>
+            <div className="contact-card"><span>Business contact</span><a href="mailto:info@globalsgs.com">info@globalsgs.com <ArrowUpRight size={16} /></a><a href="tel:+8615820404334">+86 158 2040 4334 <ArrowUpRight size={16} /></a><p>Use the contact page to provide complete product and company information.</p><div><Check size={15} /> Direct customer inquiries welcome</div></div>
           </div>
         </section>
       </main>

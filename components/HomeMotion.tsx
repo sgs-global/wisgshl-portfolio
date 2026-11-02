@@ -11,6 +11,40 @@ export function HomeMotion() {
     const context = gsap.context(() => {
       const media = gsap.matchMedia();
 
+      // One controller owns the active step, including on reverse scroll and refresh.
+      // Cache layout measurements on refresh; no per-frame bounding-box reads.
+      const flow = document.querySelector<HTMLElement>(".supply-flow");
+      const steps = gsap.utils.toArray<HTMLElement>(".supply-flow .supply-step");
+      if (flow && steps.length) {
+        let centers: number[] = [];
+        let activeIndex = -1;
+        const measure = () => {
+          centers = steps.map((step) => step.offsetTop + step.offsetHeight / 2);
+        };
+        measure();
+        const synchronize = (progress: number) => {
+          const position = centers[0] + progress * (centers[centers.length - 1] - centers[0]);
+          let nextIndex = 0;
+          centers.forEach((center, index) => {
+            if (Math.abs(center - position) < Math.abs(centers[nextIndex] - position)) nextIndex = index;
+          });
+          if (nextIndex !== activeIndex) {
+            activeIndex = nextIndex;
+            steps.forEach((step, index) => step.classList.toggle("is-active", index === activeIndex));
+          }
+          flow.style.setProperty("--journey-position", `${position}px`);
+        };
+        const journeyTrigger = ScrollTrigger.create({
+          trigger: flow,
+          start: () => `${centers[0]}px center`,
+          end: () => `${centers[centers.length - 1]}px center`,
+          onRefreshInit: measure,
+          onRefresh: (self) => synchronize(self.progress),
+          onUpdate: (self) => synchronize(self.progress),
+        });
+        synchronize(journeyTrigger.progress);
+      }
+
       media.add("(prefers-reduced-motion: no-preference)", () => {
         const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
@@ -65,40 +99,6 @@ export function HomeMotion() {
           }),
         });
 
-        const supplySteps = gsap.utils.toArray<HTMLElement>(".supply-step");
-        const activateSupplyStep = (activeIndex: number) => {
-          supplySteps.forEach((step, index) => step.classList.toggle("is-active", index === activeIndex));
-        };
-
-        supplySteps.forEach((step, index) => {
-          const card = step.querySelector(".supply-step-card");
-          const light = step.querySelector(".supply-light");
-
-          gsap.from(card, {
-            autoAlpha: 0,
-            x: index % 2 === 0 ? 70 : -70,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: { trigger: step, start: "top 78%", once: true },
-          });
-
-          gsap.from(light, {
-            autoAlpha: 0,
-            scale: 0.82,
-            duration: 0.8,
-            ease: "back.out(1.35)",
-            scrollTrigger: { trigger: step, start: "top 82%", once: true },
-          });
-
-          ScrollTrigger.create({
-            trigger: step,
-            start: "top center",
-            end: "bottom center",
-            onEnter: () => activateSupplyStep(index),
-            onEnterBack: () => activateSupplyStep(index),
-          });
-        });
-
         const stage = document.querySelector<HTMLElement>(".hero-team-stage");
         const photo = document.querySelector<HTMLElement>(".hero-team-photo");
         const backdrop = document.querySelector<HTMLElement>(".hero-port-bg");
@@ -129,7 +129,13 @@ export function HomeMotion() {
       });
     });
 
-    return () => context.revert();
+    return () => {
+      context.revert();
+      document.querySelector<HTMLElement>(".supply-flow")?.style.removeProperty("--journey-position");
+      document.querySelectorAll(".supply-flow .supply-step").forEach((step, index) => {
+        step.classList.toggle("is-active", index === 0);
+      });
+    };
   }, []);
 
   return null;

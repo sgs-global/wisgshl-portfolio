@@ -9,7 +9,7 @@ const links = [
   ["Home", "/#home"],
   ["About Us", "/#about"],
   ["Products", "/#divisions"],
-  ["Our Team", "/#team"],
+  // ["Our Team", "/#team"],
   ["Contact Us", "/contact"],
 ];
 
