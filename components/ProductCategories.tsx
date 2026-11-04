@@ -1,6 +1,10 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { ContactForm } from "./ContactForm";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, X } from "lucide-react";
 import styles from "./ProductCategories.module.css";
 
 type Category = {
@@ -23,6 +27,30 @@ const categories: Category[] = [
 ];
 
 export function ProductCategories() {
+  const modal = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLElement | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
+  useEffect(() => {
+    if (!selected) return;
+    const dialog = modal.current;
+    if (!dialog) return;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      if (dialog.open) dialog.close();
+    };
+  }, [selected]);
+  function openInquiry(category: string) {
+    if (!modal.current || modal.current.open) return;
+    trigger.current = document.activeElement as HTMLElement;
+    setSelected(category);
+  }
+  function closeInquiry() {
+    setSelected(null);
+    trigger.current?.focus({ preventScroll: true });
+  }
   return (
     <section className={`section ${styles.section}`} id="divisions" aria-labelledby="product-categories-title">
       <div className="container">
@@ -50,7 +78,7 @@ export function ProductCategories() {
                 <h3>{category.title}</h3>
                 <p>{category.description}</p>
                 {category.highlights.length > 0 && <ul className={styles.tags}>{category.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>}
-                <Link className={styles.explore} href="/contact" aria-label={`Explore ${category.title} with our manufacturing team`}>Explore Products <ArrowUpRight size={18} aria-hidden="true" /></Link>
+                <button type="button" className={styles.explore} onClick={() => openInquiry(category.title)} aria-haspopup="dialog" aria-label={`Request ${category.title} requirements`}>Explore Products <ArrowUpRight size={18} aria-hidden="true" /></button>
               </div>
             </article>
           ))}
@@ -60,6 +88,12 @@ export function ProductCategories() {
           <Link className={styles.quotation} href="/contact">Request a Quotation <ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
       </div>
+      <dialog ref={modal} className={styles.inquiryDialog} aria-label={`${selected ?? "Product"} inquiry`} onClose={closeInquiry} onClick={(event) => { if (event.target === event.currentTarget) modal.current?.close(); }}>
+        <div className={styles.dialogContent}>
+          <div className={styles.dialogTop}><span>Discuss your project</span><button type="button" autoFocus onClick={() => modal.current?.close()} aria-label="Close product inquiry"><X size={22} /></button></div>
+          {selected && <ContactForm key={selected} initialCategory={selected} compact />}
+        </div>
+      </dialog>
     </section>
   );
 }

@@ -10,6 +10,10 @@ out/
 .env.local
 .env.*.local
 
+# Private SMTP credentials: never publish or commit
+.private/
+.wisgshl/
+
 # Logs and test artifacts
 *.log
 npm-debug.log*

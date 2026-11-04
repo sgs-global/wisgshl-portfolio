@@ -3667,3 +3667,62 @@ img {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Simplified contact and product inquiry */
+.contact-hero { padding: 64px 0; }
+.contact-hero-inner { grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+.contact-hero h1 { max-width: 660px; font-size: clamp(40px, 5vw, 62px); line-height: 1.08; }
+.contact-main { padding: 56px 0 80px; }
+.contact-page-grid { grid-template-columns: minmax(0, 1.35fr) minmax(300px, .85fr); gap: 28px; }
+.inquiry-form { padding: 32px; min-width: 0; }
+.form-heading h2 { font-size: clamp(27px, 3vw, 34px); }
+.inquiry-fields { padding: 0; margin: 0; border: 0; min-width: 0; }
+.form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.form-grid label { min-width: 0; font-size: 12px; }
+.form-grid label > span { display: block; }
+.form-grid label small { font-size: 10px; color: var(--muted); font-weight: 400; }
+.product-specs { padding: 18px; border: 1px solid #e2e8ef; border-radius: 10px; background: #f7f8fa; }
+.product-specs > p { margin: 0 0 14px; font-size: 12px; color: var(--navy-dark); font-weight: 600; }
+.product-specs > p small { display: block; margin-top: 3px; font-size: 10px; font-weight: 400; color: var(--muted); }
+.form-action { margin-top: 24px; }
+.form-action .button { flex-shrink: 0; }
+.form-action p { font-size: 11px; }
+.inquiry-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.form-error { margin-top: 20px; padding: 14px; border: 1px solid #eac7bb; border-radius: 8px; background: #fff7f3; font-size: 12px; color: #803d27; }
+.form-error p { margin: 0 0 10px; }
+.form-error a { display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; }
+.inquiry-note { color: var(--muted); font-size: 13px; }
+.inquiry-compact { padding: 26px 32px 32px; border: 0; border-radius: 0; }
+.button:disabled { opacity: .65; cursor: wait; }
+.contact-details-panel { padding: 24px; }
+.map-card iframe { height: 240px; }
+.map-caption { padding: 22px; }
+.map-caption address { margin-top: 7px; font-style: normal; font-size: 13px; line-height: 1.7; color: var(--navy-dark); }
+.location-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; color: var(--navy); font-size: 12px; font-weight: 600; }
+.contact-locations { padding: 24px; background: #fff; border: 1px solid var(--border); border-radius: 16px; }
+.contact-locations > span { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #885522; font-weight: 600; }
+.contact-locations h2 { font: 500 24px/1.25 Georgia, serif; color: var(--navy-dark); margin: 14px 0 22px; }
+.contact-locations dl { margin: 0; }
+.contact-locations dl > div + div { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 16px; }
+.contact-locations dt { font-size: 11px; color: var(--muted); }
+.contact-locations dd { margin: 4px 0 0; color: var(--navy-dark); font-size: 14px; }
+@media (max-width: 900px) {
+  .contact-hero-inner, .contact-page-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .contact-sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .map-card { grid-row: span 2; }
+}
+@media (max-width: 600px) {
+  .contact-hero { padding: 44px 0; }
+  .contact-sidebar, .form-grid { grid-template-columns: minmax(0, 1fr); }
+  .inquiry-form, .inquiry-compact { padding: 24px 20px; }
+  .form-action { align-items: stretch; flex-direction: column; gap: 12px; }
+  .form-action .button { width: 100%; }
+  .product-specs { padding: 14px; }
+}
+.office-map-frame { position: relative; height: 240px; background: #edf1f5; }
+.office-map-frame iframe { position: absolute; inset: 0; height: 100%; }
+.office-map-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; text-align: center; color: var(--navy-dark); }
+.office-map-placeholder > svg { color: #a6692f; }
+.office-map-placeholder > strong { font: 500 24px/1.2 Georgia, serif; }
+.office-map-placeholder a { display: inline-flex; gap: 7px; align-items: center; font-size: 11px; text-decoration: underline; }
+.office-map-frame iframe[style*="opacity:0"], .office-map-frame iframe[style*="opacity: 0"] { pointer-events: none; }
